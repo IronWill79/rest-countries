@@ -1,6 +1,6 @@
-export default function CountryRow({ country, index }) {
+export default function CountryRow({ country }) {
   return (
-    <tr key={index}>
+    <tr>
       <td>{country.name}</td>
     </tr>
   );
