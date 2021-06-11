@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import CountryTable from './components/CountryTable';
+import CountryListSort from './functions/CountryListSort';
 import './App.css';
 
 export default function App() {
@@ -12,7 +13,7 @@ export default function App() {
       .then(res => res.json())
       .then(res => {
         setIsLoaded(true);
-        setCountryList(res);
+        setCountryList(res.sort(CountryListSort));
       }, err => {
         setIsLoaded(true);
         setError(err);
