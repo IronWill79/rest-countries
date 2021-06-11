@@ -1,6 +1,23 @@
+import { useEffect, useState } from 'react';
 import './App.css';
 
 export default function App() {
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [countryList, setCountryList] = useState([]);
+
+  useEffect(() => {
+    fetch('https://restcountries.eu/rest/v2/all')
+      .then(res => res.json())
+      .then(res => {
+        setIsLoaded(true);
+        setCountryList(res);
+      }, err => {
+        setIsLoaded(true);
+        setError(err);
+      })
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -10,7 +27,7 @@ export default function App() {
         </p>
       </header>
       <div>
-        Show country list here
+        {countryList.map(country => (<p>{country.name}</p>))}
       </div>
     </div>
   );
