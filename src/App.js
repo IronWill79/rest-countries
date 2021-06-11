@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import CountryTable from './components/CountryTable';
+import FilterableCountryTable from './components/FilterableCountryTable';
 import CountryListSort from './functions/CountryListSort';
 import './App.css';
 
@@ -33,7 +33,7 @@ export default function App() {
             </p>
           </header>
           <div>
-            <CountryTable countries={countryList} />
+            <FilterableCountryTable countries={countryList} />
           </div>
         </>
       )}
