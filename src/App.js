@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import CountryRow from './components/CountryRow';
 import './App.css';
 
 export default function App() {
@@ -31,7 +32,7 @@ export default function App() {
             </p>
           </header>
           <div>
-            {countryList.map(country => (<p>{country.name}</p>))}
+            {countryList.map(country => (<CountryRow country={country} />))}
           </div>
         </>
       )}
