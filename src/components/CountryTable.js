@@ -9,7 +9,7 @@ export default function CountryTable({countries}) {
         </tr>
       </thead>
       <tbody>
-        {countries.map(country => (<CountryRow country={country} />))}
+        {countries.map((country, index) => (<CountryRow country={country} key={index} />))}
       </tbody>
     </table>
   );
