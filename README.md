@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+## The Challenge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Build an app that can display a list of countries with the capability of filtering results through a search mechanism, paginating countries and showing information about each individual country.
 
-## Available Scripts
+Use the [RESTCountries endpoint](https://restcountries.eu/rest/v2/all) to get the list of all countries.
 
-In the project directory, you can run:
+## Requirements
 
-### `yarn start`
+- Create a web application using React consisting of two pages, as described in the sections below.
+- Write your own pagination logic
+- Write your own search logic, no need for super advanced search logic
+- You are free to use a UI library such as Material-UI
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Countries page
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```
+Scenario 1: Countries loading
+Given I am on the countries page
+When the countries haven't finished loading
+Then I should see a loading spinner
 
-### `yarn test`
+Scenario 2: Countries loaded
+Given I am on the countries page
+When the countries have finished loading
+Then I should see the first 10 countries in alphabetical order
+  And display their country name
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Scenario 3: Search
+Given I have entered text in the search input
+When I click the search button
+Then I should update the countries list to only show countries which contain the search text
 
-### `yarn build`
+Scenario 4: Hide next page button
+Given there are no more countries on the next page
+When the countries list has updated
+Then hide the button to paginate to the next page
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Scenario 5: Hide previous page button
+Given there are no more countries on the previous page
+When the countries list has updated
+Then hide the button to paginate to the previous page
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Scenario 6: Clicking the next page button
+Given the next page button is visible
+When I click on the next page button
+Then I should see the next 10 countries in alphabetical order
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Scenario 7: Clicking the previous page button
+Given the previous page button is visible
+When I click on the previous page button
+Then I should see the previous 10 countries in alphabetical order
 
-### `yarn eject`
+Scenario 8: Clicking a country
+Given the countries list has loaded
+When I click a country
+Then take me to that country's page
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Country page
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+Scenario 1: Country loading
+Given I am on the country page
+When the country hasn't finished loading
+Then I should see a loading spinner
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Scenario 2: Country loaded
+Given I am on the country page
+When the country has finished loading
+Then I should see the country's flag
+  And the country's name
+  And the country's population
+  And the country's demonym
+```
