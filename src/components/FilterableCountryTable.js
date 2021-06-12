@@ -10,11 +10,16 @@ export default function FilterableCountryTable({ countries }) {
     setFilter(value);
   }
 
+  const filteredCountries = filter === '' ? countries : countries.filter(country => {
+    const comparisonString = country.name.toLowerCase().slice(0, filter.length);
+    return comparisonString.localeCompare(filter, 'en', { sensitivity: 'base' }) === 0;
+  });
+
   return (
     <div>
       <SearchBar filter={filter} handleChange={handleChange} />
       <PaginationBar />
-      <CountryTable countries={countries.filter(country => country.name.toLowerCase().startsWith(filter))} />
+      <CountryTable countries={filteredCountries} />
     </div>
   )
 }
