@@ -11,20 +11,36 @@ export default function App() {
   const [selectedCountry, setSelectedCountry] = useState(null);
 
   useEffect(() => {
-    fetch('https://restcountries.eu/rest/v2/all')
-      .then(res => res.json())
-      .then(res => {
-        setIsLoaded(true);
-        setCountryList(res.sort(CountryListSort));
-      }, err => {
-        setIsLoaded(true);
-        setError(err);
-      })
+    // If homepage, load all country names
+    if (window.location.pathname === '/') {
+      fetch('https://restcountries.eu/rest/v2/all?fields=name')
+        .then(res => res.json())
+        .then(res => {
+          setIsLoaded(true);
+          setCountryList(res.sort(CountryListSort));
+        }, err => {
+          setIsLoaded(true);
+          setError(err);
+        })
+    }
+    // If path = /country/, get country name from end of 
+    else if (window.location.pathname.startsWith('/country/')) {
+      const country = window.location.pathname.replace('/country/', '');
+      fetch(`https://restcountries.eu/rest/v2/name/${country}`)
+        .then(res => res.json())
+        .then(res => {
+          setIsLoaded(true);
+          setSelectedCountry(res[0]);
+        }, err => {
+          setIsLoaded(true);
+          setError(err);
+        })
+    }
   }, []);
 
-  const handleCountrySelection = (country) => setSelectedCountry(country);
+  // const handleCountrySelection = (country) => setSelectedCountry(country);
 
-  const handleClear = () => setSelectedCountry(null);
+  // const handleClear = () => setSelectedCountry(null);
 
   return (
     <div className="App">
@@ -39,13 +55,15 @@ export default function App() {
             </p>
           </header>
           <div>
-            <FilterableCountryTable countries={countryList} handleSelect={handleCountrySelection} />
+            <FilterableCountryTable countries={countryList} />
+            {/* <FilterableCountryTable countries={countryList} handleSelect={handleCountrySelection} /> */}
           </div>
         </>
       )}
       {selectedCountry && (
         <div>
-          <Country country={selectedCountry} handleClear={handleClear} />
+          <Country country={selectedCountry} />
+          {/* <Country country={selectedCountry} handleClear={handleClear} /> */}
         </div>
       )}
     </div>

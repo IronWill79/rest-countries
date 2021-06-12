@@ -1,11 +1,11 @@
-export default function CountryRow({ country, handleSelect }) {
-const selectCountry = () => {
-  handleSelect(country);
-}
+export default function CountryRow({ country /*, handleSelect */ }) {
+  // const selectCountry = () => {
+  //   handleSelect(country);
+  // }
 
   return (
     <tr>
-      <td><button onClick={selectCountry}>{country.name}</button></td>
+      <td><a href={'/country/' + country.name}>{country.name}</a></td>
     </tr>
   );
 }

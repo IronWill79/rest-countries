@@ -1,4 +1,4 @@
-export default function Country({ country, handleClear }) {
+export default function Country({ country /*, handleClear */ }) {
   return (
     <div>
       {country.name}
