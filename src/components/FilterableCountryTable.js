@@ -3,7 +3,7 @@ import CountryTable from './CountryTable';
 import SearchBar from './SearchBar';
 import PaginationBar from './PaginationBar';
 
-export default function FilterableCountryTable({ countries }) {
+export default function FilterableCountryTable({ countries, handleSelect }) {
   const [filter, setFilter] = useState('');
 
   const handleChange = (value) => {
@@ -30,11 +30,15 @@ export default function FilterableCountryTable({ countries }) {
     noMorePages = true;
   }
 
+  const handleCountrySelect = (country) => {
+    handleSelect(country);
+  }
+
   return (
     <div>
       <SearchBar filter={filter} handleChange={handleChange} />
       <PaginationBar pageNumber={pageNumber} noMorePages={noMorePages} handleChange={handlePageNumber} />
-      <CountryTable countries={paginatedCountries} />
+      <CountryTable countries={paginatedCountries} handleSelect={handleCountrySelect} />
     </div>
   )
 }

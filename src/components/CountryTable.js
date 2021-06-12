@@ -1,6 +1,10 @@
 import CountryRow from './CountryRow';
 
-export default function CountryTable({countries}) {
+export default function CountryTable({ countries, handleSelect }) {
+  const selectCountry = (country) => {
+    handleSelect(country);
+  }
+
   return (
     <table>
       <thead>
@@ -9,7 +13,7 @@ export default function CountryTable({countries}) {
         </tr>
       </thead>
       <tbody>
-        {countries.map((country, index) => (<CountryRow country={country} key={index} />))}
+        {countries.map((country, index) => (<CountryRow country={country} key={index} handleSelect={selectCountry} />))}
       </tbody>
     </table>
   );

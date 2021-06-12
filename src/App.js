@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import FilterableCountryTable from './components/FilterableCountryTable';
 import CountryListSort from './functions/CountryListSort';
+import Country from './components/Country';
 import './App.css';
 
 export default function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [countryList, setCountryList] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState(null);
 
   useEffect(() => {
     fetch('https://restcountries.eu/rest/v2/all')
@@ -20,11 +22,15 @@ export default function App() {
       })
   }, []);
 
+  const handleCountrySelection = (country) => setSelectedCountry(country);
+
+  const handleClear = () => setSelectedCountry(null);
+
   return (
     <div className="App">
       {error && (<p>Error: {error.message}</p>)}
       {!isLoaded && (<p>Loading...</p>)}
-      {isLoaded && (
+      {(isLoaded && !selectedCountry) && (
         <>
           <header className="App-header">
             <h1>Tell me about a Country</h1>
@@ -33,9 +39,14 @@ export default function App() {
             </p>
           </header>
           <div>
-            <FilterableCountryTable countries={countryList} />
+            <FilterableCountryTable countries={countryList} handleSelect={handleCountrySelection} />
           </div>
         </>
+      )}
+      {selectedCountry && (
+        <div>
+          <Country country={selectedCountry} handleClear={handleClear} />
+        </div>
       )}
     </div>
   );

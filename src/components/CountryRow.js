@@ -1,7 +1,11 @@
-export default function CountryRow({ country }) {
+export default function CountryRow({ country, handleSelect }) {
+const selectCountry = () => {
+  handleSelect(country);
+}
+
   return (
     <tr>
-      <td>{country.name}</td>
+      <td><button onClick={selectCountry}>{country.name}</button></td>
     </tr>
   );
 }
