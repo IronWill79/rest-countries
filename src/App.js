@@ -45,7 +45,7 @@ export default function App() {
   return (
     <div className="App">
       {error && (<p>Error: {error.message}</p>)}
-      {!isLoaded && (<p>Loading...</p>)}
+      {!isLoaded && (<div className="lds-dual-ring"></div>)}
       {(isLoaded && !selectedCountry) && (
         <>
           <header className="App-header">

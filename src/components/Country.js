@@ -1,7 +1,7 @@
 export default function Country({ country /*, handleClear */ }) {
   console.log(country);
   return (
-    <div>
+    <div className="Country">
       <img src={country.flag} alt={country.name + "'s flag"} />
       <p>{country.name}</p>
       <p>Population: {country.population.toLocaleString()}</p>
