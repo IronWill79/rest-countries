@@ -54,14 +54,14 @@ export default function App() {
               Select a country from the list below to see the name, flag, population and demonym
             </p>
           </header>
-          <div>
+          <div className="Country-table">
             <FilterableCountryTable countries={countryList} />
             {/* <FilterableCountryTable countries={countryList} handleSelect={handleCountrySelection} /> */}
           </div>
         </>
       )}
       {selectedCountry && (
-        <div>
+        <div className="Country-table">
           <Country country={selectedCountry} />
           {/* <Country country={selectedCountry} handleClear={handleClear} /> */}
         </div>

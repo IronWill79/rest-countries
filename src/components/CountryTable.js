@@ -6,7 +6,7 @@ export default function CountryTable({ countries /*, handleSelect */ }) {
   // }
 
   return (
-    <table>
+    <table style={{ margin: 'auto' }}>
       <thead>
         <tr>
           <th>Name</th>

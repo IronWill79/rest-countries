@@ -3,6 +3,14 @@ body {
   color: #fff;
 }
 
+a {
+  color: #fff;
+}
+
+a:hover {
+  color: #aaa;
+}
+
 .App {
   text-align: center;
 }
@@ -14,4 +22,10 @@ body {
   align-items: center;
   justify-content: normal;
   font-size: calc(10px + 2vmin);
+}
+
+.Country-table {
+  display: flex;
+  justify-content: center;
+  color: #fff;
 }

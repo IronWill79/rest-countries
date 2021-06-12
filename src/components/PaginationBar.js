@@ -10,7 +10,7 @@ export default function PaginationBar({ pageNumber, noMorePages, handleChange })
   return (
     <div>
       <button disabled={pageNumber === 1} onClick={decrement}>Prev page</button>
-      <span>{pageNumber}</span>
+      <span style={{ margin: 10 }}>{pageNumber}</span>
       <button disabled={noMorePages} onClick={increment}>Next page</button>
     </div>
   )
