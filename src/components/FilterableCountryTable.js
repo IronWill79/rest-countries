@@ -7,6 +7,7 @@ export default function FilterableCountryTable({ countries }) {
   const [filter, setFilter] = useState('');
 
   const handleChange = (value) => {
+    setPageNumber(1);
     setFilter(value);
   }
 
@@ -15,11 +16,25 @@ export default function FilterableCountryTable({ countries }) {
     return comparisonString.localeCompare(filter, 'en', { sensitivity: 'base' }) === 0;
   });
 
+  const [pageNumber, setPageNumber] = useState(1);
+
+  const handlePageNumber = (number) => {
+    setPageNumber(number);
+  }
+
+  const paginatedCountries = filteredCountries.slice((pageNumber - 1) * 10, pageNumber * 10);
+
+  let noMorePages = false;
+
+  if (pageNumber * 10 >= filteredCountries.length) {
+    noMorePages = true;
+  }
+
   return (
     <div>
       <SearchBar filter={filter} handleChange={handleChange} />
-      <PaginationBar />
-      <CountryTable countries={filteredCountries} />
+      <PaginationBar pageNumber={pageNumber} noMorePages={noMorePages} handleChange={handlePageNumber} />
+      <CountryTable countries={paginatedCountries} />
     </div>
   )
 }
